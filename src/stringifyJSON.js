@@ -49,7 +49,7 @@ var stringifyJSON = function(obj) {
     }
     return '[' + tempArr.join(',') + ']';
   }
-  //Objects get a temporary string to add their stringified daya to. Including a check for undefined values and function keys.
+  //Objects get a temporary string to add their stringified data to. Including a check for undefined values and function keys.
   if (_.isObject(obj)){
     if (Object.keys(obj).length){
       var tempStr = '';
