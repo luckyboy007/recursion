@@ -31,7 +31,35 @@
 
 */
 
+/*
+  Thinking on how to implement this
+
+  getElementsByClassName will accept a className as a parameter
+  We'll have to get all the child nodes of the document by running document.body.childNodes
+  
+  Each index in the array may contain multiple classes. If they do, we should use recursion to call getElementsByClassName again on them until we're looking at just one element instead of another array
+
+      If it's undefined, no childNodes exist?
+
+  Then we can run element.classList.contains on each individual element to see if it contains the specific className. If it has it, we'll add it to our array. If not, skip over it.
+
+
+
+  Traversing the DOM for this:
+
+  1. document.body.childNodes returns all child elements in an array
+  2. You can run each index through the .childNodes method to find further child elements
+  3. For each node, you can run .classList to find a list of its classes.
+  4. You can run classList.contains(className) to look for true/false
+        If true, we'll want to add it to the resultsArr
+*/
 
 var getElementsByClassName = function(className){
-  // your code here
+  //Create an empty array to store our results that will be returned at the end
+  var resultArr = [];
+
+  //Set a variable to document.body.childNodes. A function might work better?
+  var childNodesInDocument = document.body.childNodes;
+
+
 };
