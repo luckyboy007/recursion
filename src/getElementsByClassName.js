@@ -51,15 +51,38 @@
   2. You can run each index through the .childNodes method to find further child elements
   3. For each node, you can run .classList to find a list of its classes.
   4. You can run classList.contains(className) to look for true/false
-        If true, we'll want to add it to the resultsArr
+        If true, we'll want to add it to the resultArr
 */
 
+
+
 var getElementsByClassName = function(className){
-  //Create an empty array to store our results that will be returned at the end
-  var resultArr = [];
+  //Let's create an array to store our results.
+  var resultsArr = [];
 
-  //Set a variable to document.body.childNodes. A function might work better?
-  var childNodesInDocument = document.body.childNodes;
 
+  //Function to check each class to see if it contains the class name we are looking for
+  var checkName = function(elem){
+    if (elem.classList.contains(className)){
+      resultsArr.push(elem);
+    }
+  };
+
+  //Function iterates over each element in a collection to see if that collection's element is being recognized as a DOM element (confusing, I know). If it is, then checkName is run on it followed by recursion of checkNodes.
+  var checkNodes = function(collection){
+    _.each(collection, function(elem){
+      if (_.isElement(elem)){
+        checkName(elem);
+        checkNodes(elem.childNodes);
+      }
+    });
+  };
+
+  //Haven't figured out a better solution here yet, but we first run checkName on document.body and then run checkNodes on document.body.childNodes. Initially this just ran checkNodes on document.body with a check to see if document.body was being run, but I thought that was too inelegant.
+  
+  checkName(document.body);
+  checkNodes(document.body.childNodes);
+
+  return resultsArr;
 
 };
